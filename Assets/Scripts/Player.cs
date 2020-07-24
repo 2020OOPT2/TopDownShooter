@@ -93,7 +93,7 @@ public class Player : MonoBehaviour
     private void Player_Move() // 플레이어의 움직임 + 달리기 기능을 담당합니다.
     {
         Player_Sprint(Input.GetKey(KeyCode.LeftShift) && Player_Current_Stamina > Required_Minimum_Stamina);
-        Move2();
+        Move();
     }   
 
     private void Player_Rotate() // 플레이어 오브젝트가 마우스 포인터를 바라보게 만듭니다.
