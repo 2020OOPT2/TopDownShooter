@@ -262,6 +262,7 @@ GameObject:
   - component: {fileID: 8495672156994463550}
   - component: {fileID: 707656781661410769}
   - component: {fileID: 1458193396321787697}
+  - component: {fileID: 4587006040714058068}
   m_Layer: 0
   m_Name: SkeletonArrow
   m_TagString: Enemy_Bullet
@@ -355,6 +356,27 @@ PolygonCollider2D:
       - {x: -0.05082807, y: 0.5495362}
       - {x: 0.04866395, y: 0.5496529}
       - {x: 0.08890464, y: 0.6501967}
+--- !u!50 &4587006040714058068
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4926963453370708597}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &6329480294414299493
 GameObject:
   m_ObjectHideFlags: 0
