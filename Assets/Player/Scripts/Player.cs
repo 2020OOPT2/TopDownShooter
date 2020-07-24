@@ -44,14 +44,13 @@ public class Player : MonoBehaviour
         {
             Player_Move();
             Player_Rotate();
-            Indicator();
+            //Indicator();
             Delay_Timer += Time.deltaTime;
             if (Delay_Timer > Shoot_Delay && Input.GetKey(KeyCode.Space)) // Space를 통해 발사, Shoot_Delay를 통해 연사 속도를 조절합니다.
             {
                 Fire_Bullet();
                 Delay_Timer = 0;
             }
-            //Player_Current_HP -= 10 * Time.deltaTime;
         }
         else
         {
