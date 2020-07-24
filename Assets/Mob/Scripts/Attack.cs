@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackClose : MonoBehaviour
+public class Attack : MonoBehaviour
 {
     public float AttackRange;
     public float AttackingTime;
@@ -12,6 +12,8 @@ public class AttackClose : MonoBehaviour
     public float Dead = 0;
     float NowAttackingTime = 0;
     float Distance() { return this.GetComponent<Movement_Mob>().Distance(); }
+    GameObject Poison = GameObject.Find("GhoulPoison");
+
 
     void Update()
     {
@@ -36,9 +38,10 @@ public class AttackClose : MonoBehaviour
             Debug.Log(gameObject.name + "가 "+ collision.gameObject.GetComponent<Bullet>().Bullet_Damage + "만큼의 피해를 받았습니다.");
             if (HP <= 0)
             {
-                if (gameObject.name == "Ghoul") Instantiate(GameObject.Find("GhoulPoison"), this.transform.position, Quaternion.identity);
+                if (gameObject.name == "Ghoul") 
+                    Instantiate(Poison, this.transform.position, Quaternion.identity);
                 Destroy(gameObject);
-            }            
+            }
         }
     }
 }

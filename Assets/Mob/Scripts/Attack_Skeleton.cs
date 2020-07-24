@@ -13,7 +13,7 @@ public class Attack_Skeleton : MonoBehaviour
     {
         NowShootingTime += Time.deltaTime;
 
-        if (Distance() >= this.GetComponent<AttackClose>().AttackRange 
+        if (Distance() >= this.GetComponent<Attack>().AttackRange 
             && Distance() < ShotRange && ShootingTime <= NowShootingTime){
             Instantiate(Arrow, this.transform.position, Quaternion.identity);
             NowShootingTime = 0;
