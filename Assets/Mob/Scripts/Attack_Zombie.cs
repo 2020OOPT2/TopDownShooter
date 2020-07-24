@@ -26,12 +26,12 @@ public class Attack_Zombie : MonoBehaviour
         
 
     }
-    void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision) //총알에 Is trigger가 체크되어 있으므로 OnTriggerEnter2D로 변경하였습니다.
     {
         if (collision.gameObject.tag == "Bullet" && ZombieHP > 0)
-        {
-            ZombieHP -= 5; // GameObject.Find("Bullet").GetComponent<Bullet>().불렛공격력
-            Debug.Log("좀비가 5만큼의 피해를 받았습니다.");
+        {   // Find("Bullet")을 사용 시 NullReference 에러가 발생하여 충돌한 오브젝트의 태그를 활용하는 방식으로 변경하였습니다.
+            ZombieHP -= collision.gameObject.GetComponent<Bullet>().Bullet_Damage;
+            Debug.Log("좀비가"+ collision.gameObject.GetComponent<Bullet>().Bullet_Damage + "만큼의 피해를 받았습니다.");
             if (ZombieHP <= 0) Destroy(gameObject);
         }
     }
