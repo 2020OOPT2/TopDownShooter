@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     public float Player_Max_HP;
     public float Player_Current_HP;
     public float Player_Max_Stamina;
-    private float Player_Current_Stamina;
+    public float Player_Current_Stamina;
     public float Stamina_Decrease_Speed;
     public float Stamina_Regen_Speed;
 
