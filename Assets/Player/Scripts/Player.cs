@@ -19,9 +19,12 @@ public class Player : MonoBehaviour
     public float Sprint_Speed;
     private float Angle; // 플레이어 오브젝트와 마우스포인터 사이의 각도
 
+    private bool Is_Unbeatable = false;
     public float Bullet_Speed;
     public float Shoot_Delay; // 발사 후 다음 발사 까지의 딜레이
+    public float Damage_Delay; // 데미지 받고난 뒤 무적시간
     private float Delay_Timer = 0;
+    private float Damage_Timer = 0;
 
     private Rigidbody2D Pl_Rigid;
     public GameObject Bullet;
@@ -31,8 +34,7 @@ public class Player : MonoBehaviour
         Player_Current_HP = Player_Max_HP;
         Move_Speed = Normal_Speed;
         Player_Current_Stamina = Player_Max_Stamina;
-        //Bullet = GameObject.FindGameObjectWithTag("Bullet");
-        Mouse_Position = Input.mousePosition;
+        Damage_Timer = Damage_Delay;
         Pl_Rigid = this.GetComponent<Rigidbody2D>();
     }
 
@@ -44,7 +46,7 @@ public class Player : MonoBehaviour
         {
             Player_Move();
             Player_Rotate();
-            //Indicator();
+            Judge_Unbeatable_State();
             Delay_Timer += Time.deltaTime;
             if (Delay_Timer > Shoot_Delay && Input.GetKey(KeyCode.Space)) // Space를 통해 발사, Shoot_Delay를 통해 연사 속도를 조절합니다.
             {
@@ -56,6 +58,37 @@ public class Player : MonoBehaviour
         {
             Pl_Rigid.velocity = new Vector2(0, 0);
             Debug.Log("죽었습니다!"); 
+        }
+    }
+
+    private void Judge_Unbeatable_State()
+    {
+        Damage_Timer += Time.deltaTime;
+        if (Damage_Timer > Damage_Delay)
+        {
+            Is_Unbeatable = false;
+            this.GetComponent<Player_Material_Control>().Change_State_ToDefault();
+        }
+        else
+        {
+            Is_Unbeatable = true;
+            this.GetComponent<Player_Material_Control>().Change_State_ToUnbeatable();
+        }
+            
+    }
+
+    public void Player_Damaged(float Mob_Strength)
+    {
+        if (!Is_Unbeatable) // 무적이 아닐 경우
+        {
+            Player_Current_HP -= Mob_Strength;
+            Damage_Timer = 0;
+            Debug.Log("플레이어가 맞았습니다!");
+        }
+        else
+        { 
+            Debug.Log("지금은 무적입니다!");
+            Indicator();
         }
     }
 

@@ -461,6 +461,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6352812275958848837, guid: cbe35983be1ec804588009e9f78b90d9,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 541f1f9fa26b6584aa1efbafa72d081e, type: 2}
     - target: {fileID: 6352812275958848839, guid: cbe35983be1ec804588009e9f78b90d9,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -520,6 +525,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6352812275958848842, guid: cbe35983be1ec804588009e9f78b90d9,
+        type: 3}
+      propertyPath: Damage_Delay
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cbe35983be1ec804588009e9f78b90d9, type: 3}

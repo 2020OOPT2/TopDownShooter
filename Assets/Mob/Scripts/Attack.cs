@@ -12,8 +12,12 @@ public class Attack : MonoBehaviour
     public float Dead = 0;
     float NowAttackingTime = 0;
     float Distance() { return this.GetComponent<Movement_Mob>().Distance(); }
-    GameObject Poison = GameObject.Find("GhoulPoison");
+    GameObject Poison;
 
+    private void Awake()
+    {
+        Poison = GameObject.Find("GhoulPoison");
+    }
 
     void Update()
     {
@@ -22,8 +26,9 @@ public class Attack : MonoBehaviour
         {
             if (GameObject.Find("Player").GetComponent<Player>().Player_Current_HP >= 0)
             {
-                GameObject.Find("Player").GetComponent<Player>().Player_Current_HP -= Strength;
-                Debug.Log("플레이어가 " + gameObject.name + "에게 " + Strength + "만큼의 피해를 받았습니다.");
+                //GameObject.Find("Player").GetComponent<Player>().Player_Current_HP -= Strength; <- 기존 코드
+                GameObject.Find("Player").GetComponent<Player>().Player_Damaged(Strength);
+                Debug.Log("플레이어가 " + this.gameObject.name + "에게 " + Strength + "만큼의 피해를 받았습니다.");
             }
             NowAttackingTime = 0;
         }
