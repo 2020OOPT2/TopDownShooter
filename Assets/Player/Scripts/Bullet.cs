@@ -6,10 +6,13 @@ public class Bullet : MonoBehaviour
 {
     CircleCollider2D Bullet_Col;
     public float Bullet_Damage;
+    public float Bullet_Speed;
+    public float Reload_Time;
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         Bullet_Col = this.GetComponent<CircleCollider2D>();
+        this.transform.rotation = GameObject.FindGameObjectWithTag("Player").transform.rotation;
     }
 
     // Update is called once per frame
@@ -21,7 +24,7 @@ public class Bullet : MonoBehaviour
   
     private void OnTriggerEnter2D(Collider2D collision) // 총알끼리 충돌하는 것을 막기 위해 Is trigger를 체크해 둔 상태입니다.
     {
-        if (collision.gameObject.tag != "Player" && collision.gameObject.tag != "Enemy_Bullet") // 이후 벽 등이 추가될 경우 조건이 추가되어야 할 수 있습니다.
+        if (collision.gameObject.tag == "Enemy") // 이후 벽 등이 추가될 경우 조건이 추가되어야 할 수 있습니다.
         {
             Debug.Log("적을 맞혔습니다!");
             Destroy(this.gameObject);

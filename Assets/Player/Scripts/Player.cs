@@ -11,33 +11,33 @@ public class Player : MonoBehaviour
     public float Stamina_Decrease_Speed;
     public float Stamina_Regen_Speed;
 
-    private Vector2 User_Move_Dir;
     private Vector3 Mouse_Position;
     private float Move_Speed;
-    private float Required_Minimum_Stamina = 0;
+    public float Required_Minimum_Stamina = 0;
     public float Normal_Speed;
     public float Sprint_Speed;
     private float Angle; // 플레이어 오브젝트와 마우스포인터 사이의 각도
 
     private bool Is_Unbeatable = false;
-    public float Bullet_Speed;
-    public float Shoot_Delay; // 발사 후 다음 발사 까지의 딜레이
+    private float Bullet_Speed;
     public float Damage_Delay; // 데미지 받고난 뒤 무적시간
-    private float Delay_Timer = 0;
-    private float Damage_Timer = 0;
 
-    private Rigidbody2D Pl_Rigid;
-    public GameObject Bullet;
+    private int Bullet_Kind = 1;
+    private List<bool> CanShoot = new List<bool>();
+
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         Player_Current_HP = Player_Max_HP;
         Move_Speed = Normal_Speed;
         Player_Current_Stamina = Player_Max_Stamina;
-        Damage_Timer = Damage_Delay;
-        Pl_Rigid = this.GetComponent<Rigidbody2D>();
+        this.GetComponent<Player_Material_Control>().Change_State_ToDefault();
+        GameObject[] bullet_kind = GetComponent<Player_Bullet_Control>().Bullets; // 총알 오브젝트를 담는 배열
+        for(int i = 0; i < bullet_kind.Length; i++) // 각 총알 별 발사 가능 여부를 담는 리스트
+        {
+            CanShoot.Add(true);
+        }
     }
-
 
     // Update is called once per frame
     void Update()
@@ -46,35 +46,36 @@ public class Player : MonoBehaviour
         {
             Player_Move();
             Player_Rotate();
-            Judge_Unbeatable_State();
-            Delay_Timer += Time.deltaTime;
-            if (Delay_Timer > Shoot_Delay && Input.GetKey(KeyCode.Space)) // Space를 통해 발사, Shoot_Delay를 통해 연사 속도를 조절합니다.
+            Bullet_Selection();
+            if (CanShoot[Bullet_Kind-1] && Input.GetKey(KeyCode.Mouse0)) // 좌클릭을 통해 발사합니다.
             {
-                Fire_Bullet();
-                Delay_Timer = 0;
+                Fire_Bullet_Fixed();
+                StartCoroutine(Bullet_CoolDown_Manager(Bullet_Kind));
             }
         }
         else
         {
-            Pl_Rigid.velocity = new Vector2(0, 0);
-            Debug.Log("죽었습니다!"); 
+            GetComponent<Player_Material_Control>().Dead();
+            Debug.Log("죽었습니다!");
         }
     }
-
-    private void Judge_Unbeatable_State()
+    
+    IEnumerator Bullet_CoolDown_Manager(int bullet_kind) // 총알의 종류마다 발사 쿨타임을 따로 돌리게 만들어 줍니다.
     {
-        Damage_Timer += Time.deltaTime;
-        if (Damage_Timer > Damage_Delay)
-        {
-            Is_Unbeatable = false;
-            this.GetComponent<Player_Material_Control>().Change_State_ToDefault();
-        }
-        else
-        {
-            Is_Unbeatable = true;
-            this.GetComponent<Player_Material_Control>().Change_State_ToUnbeatable();
-        }
-            
+        GameObject bullet = GetComponent<Player_Bullet_Control>().Select_Bullet(Bullet_Kind);
+        float cooldown = bullet.GetComponent<Bullet>().Reload_Time;
+        CanShoot[bullet_kind - 1] = false;
+        yield return new WaitForSeconds(cooldown);
+        CanShoot[bullet_kind - 1] = true;
+    }
+
+    IEnumerator Unbeatable_State_Manager(float Unbeatable_Time) // 무적 시간을 관리해 줍니다.
+    {
+        Is_Unbeatable = true;
+        this.GetComponent<Player_Material_Control>().Change_State_ToUnbeatable();  
+        yield return new WaitForSeconds(Unbeatable_Time);
+        Is_Unbeatable = false;
+        this.GetComponent<Player_Material_Control>().Change_State_ToDefault();
     }
 
     public void Player_Damaged(float Mob_Strength)
@@ -82,22 +83,21 @@ public class Player : MonoBehaviour
         if (!Is_Unbeatable) // 무적이 아닐 경우
         {
             Player_Current_HP -= Mob_Strength;
-            Damage_Timer = 0;
+            if (Player_Current_HP > 0)
+                StartCoroutine(Unbeatable_State_Manager(Damage_Delay));
             Debug.Log("플레이어가 맞았습니다!");
         }
         else
-        { 
+        {
             Debug.Log("지금은 무적입니다!");
             Indicator();
         }
     }
-
     private void Indicator()
     {
         Debug.Log("현재 체력 : " + Player_Current_HP);
         Debug.Log("현재 스태미너 : " + Player_Current_Stamina);
     }
-
     private void Player_Sprint(bool Is_Sprinting) // 스프린트 여부에 따른 플레이어 이동 속력 변화, 스태미너 관리를 담당합니다.
     {
         if (Is_Sprinting)
@@ -117,32 +117,42 @@ public class Player : MonoBehaviour
         else
         {
             Move_Speed = Normal_Speed;
-            if(Player_Current_Stamina <= Player_Max_Stamina)
+            if (Player_Current_Stamina <= Player_Max_Stamina)
                 Player_Current_Stamina += Stamina_Regen_Speed * Time.deltaTime;
         }
-            
-    }   
+
+    }
+
     private void Player_Move() // 플레이어의 움직임 + 달리기 기능을 담당합니다.
     {
         Player_Sprint(Input.GetKey(KeyCode.LeftShift) && Player_Current_Stamina > Required_Minimum_Stamina);
         Move();
-    }   
+    }
 
     private void Player_Rotate() // 플레이어 오브젝트가 마우스 포인터를 바라보게 만듭니다.
     {
         Mouse_Position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Angle = Mathf.Atan2((Mouse_Position.y - this.transform.position.y), (Mouse_Position.x - this.transform.position.x))*Mathf.Rad2Deg;
-        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Angle));
+        Angle = Mathf.Atan2((Mouse_Position.y - this.transform.position.y), (Mouse_Position.x - this.transform.position.x)) * Mathf.Rad2Deg;
+        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, Angle-90));
     }
 
-    private void Fire_Bullet() // 총알 오브젝트를 생성하고, 마우스 포인터를 향해 발사합니다. Bullet_Speed를 통해 총알 속도를 조절합니다.
+    private void Bullet_Selection() // 발사할 총알의 종류를 선택합니다.
     {
-        GameObject fired_Bullet = Instantiate(Bullet, this.transform.position, this.transform.rotation);
+        if (Input.GetKey(KeyCode.Alpha1))
+            Bullet_Kind = 1;
+        else if (Input.GetKey(KeyCode.Alpha2))
+            Bullet_Kind = 2;
+    }
+    private void Fire_Bullet_Fixed() // 총알 오브젝트를 생성하고, 마우스 포인터를 향해 발사합니다. Bullet_Speed를 통해 총알 속도를 조절합니다.
+    {                                // 총알의 종류를 선택할 수 있습니다.
+        GameObject bullet = GetComponent<Player_Bullet_Control>().Select_Bullet(Bullet_Kind);
+        Bullet_Speed = bullet.GetComponent<Bullet>().Bullet_Speed;
+        GameObject fired_Bullet = Instantiate(bullet, this.transform.position, this.transform.rotation);
         Rigidbody2D fired_Bullet_Rb = fired_Bullet.GetComponent<Rigidbody2D>();
         fired_Bullet_Rb.velocity = new Vector2(Mouse_Position.x - this.transform.position.x,
                                                Mouse_Position.y - this.transform.position.y).normalized * Bullet_Speed;
     }
-
+    
     private void Move() // WSAD를 사용해 플레이어를 움직입니다. 오브젝트의 포지션을 변경합니다.
     {
         if (Input.GetKey(KeyCode.W))
@@ -153,18 +163,5 @@ public class Player : MonoBehaviour
             this.transform.position += new Vector3(-1, 0, 0) * Move_Speed * Time.deltaTime;
         if (Input.GetKey(KeyCode.D))
             this.transform.position += new Vector3(1, 0, 0) * Move_Speed * Time.deltaTime;
-    }
-    private void Move2() // WSAD를 사용해 플레이어를 움직입니다. 오브젝트의 속도를 변경합니다. 뭐가 더 적당할지 몰라 다 만들어 놓았습니다.
-    {
-        if (Input.GetKey(KeyCode.W))
-            User_Move_Dir += new Vector2(0, 1);
-        if (Input.GetKey(KeyCode.S))
-            User_Move_Dir += new Vector2(0, -1);
-        if (Input.GetKey(KeyCode.A))
-            User_Move_Dir += new Vector2(-1, 0);
-        if (Input.GetKey(KeyCode.D))
-            User_Move_Dir += new Vector2(1, 0);
-        Pl_Rigid.velocity = User_Move_Dir.normalized * Move_Speed;
-        User_Move_Dir = new Vector2(0, 0);
     }
 }
