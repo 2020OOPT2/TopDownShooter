@@ -451,9 +451,9 @@ GameObject:
   - component: {fileID: 3671531277427459944}
   - component: {fileID: 3671531277427459945}
   - component: {fileID: -6206252361282166410}
-  - component: {fileID: -9156554292114974162}
   - component: {fileID: 3592444722576596650}
   - component: {fileID: -4762549706448519938}
+  - component: {fileID: -3438718015219125412}
   m_Layer: 0
   m_Name: Ghoul
   m_TagString: Enemy
@@ -540,23 +540,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Range: 1
   velocity: 4
---- !u!114 &-9156554292114974162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3671531277427459860}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a1c0b46e8d671145b10cddc4958ed24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackRange: 1.3
-  AttackingTime: 1
-  Strength: 3
-  HP: 20
-  Dead: 0
 --- !u!50 &3592444722576596650
 Rigidbody2D:
   serializedVersion: 4
@@ -604,6 +587,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &-3438718015219125412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3671531277427459860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8f0b723992f180243a176a312faa490e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AttackRange: 1.3
+  AttackingTime: 1
+  Strength: 3
+  HP: 20
+  Poison: {fileID: 1102269400571663827, guid: 5770de14953a89047a63dd16176a0d5e, type: 3}
 --- !u!1 &4993864523944640692
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 822644559435921905}
   - component: {fileID: 1067117065238431944}
   - component: {fileID: 2255021379187184410}
+  - component: {fileID: 6854874915486832019}
   m_Layer: 0
   m_Name: GhoulPoison
-  m_TagString: Untagged
+  m_TagString: Poison
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -64,12 +65,28 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0025035583, y: 0.0000194059}
   serializedVersion: 2
   m_Radius: 1.9961817
+--- !u!114 &6854874915486832019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1102269400571663827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 568184b1ae6d06a46a775557418a80e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Time_Delete: 5
+  AttackingTime: 1
+  Velocity: 2
+  Strength: 8
 --- !u!1 &4365777547786379674
 GameObject:
   m_ObjectHideFlags: 0

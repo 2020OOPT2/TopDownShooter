@@ -4,13 +4,43 @@ using UnityEngine;
 
 public class Attack_Ghoul : MonoBehaviour
 {
-
+    public float AttackRange;
+    public float AttackingTime;
+    public float Strength;
+    public float HP;
+    float NowAttackingTime = 0;
+    float Distance() { return this.GetComponent<Movement_Mob>().Distance(); }
     public GameObject Poison;
+
     void Update()
     {
-        if (this.GetComponent<Attack>().Dead == 1)
+        NowAttackingTime += Time.deltaTime;
+        if (Distance() < AttackRange && AttackingTime <= NowAttackingTime)
         {
-            Instantiate(Poison, this.transform.position, Quaternion.identity);
+            if (GameObject.Find("Player").GetComponent<Player>().Player_Current_HP >= 0)
+            {
+                //GameObject.Find("Player").GetComponent<Player>().Player_Current_HP -= Strength; <- 기존 코드
+                GameObject.Find("Player").GetComponent<Player>().Player_Damaged(Strength);
+                Debug.Log("플레이어가 " + this.gameObject.name + "에게 " + Strength + "만큼의 피해를 받았습니다.");
+            }
+            NowAttackingTime = 0;
+        }
+
+
+    }
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Bullet" && HP >= -1)
+        {
+            HP -= collision.gameObject.GetComponent<Bullet>().Bullet_Damage;
+            Debug.Log(gameObject.name + "가 " + collision.gameObject.GetComponent<Bullet>().Bullet_Damage + "만큼의 피해를 받았습니다.");
+        }
+        if (HP <= 0)
+        {
+            Vector3 PoisonPos = this.transform.position;
+            PoisonPos.z += 2;
+            Instantiate(Poison, PoisonPos, Quaternion.identity);
+            Destroy(gameObject);
         }
     }
 }
