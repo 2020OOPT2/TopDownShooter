@@ -148,6 +148,8 @@ public class Player : MonoBehaviour
         GameObject bullet = GetComponent<Player_Bullet_Control>().Select_Bullet(Bullet_Kind);
         Bullet_Speed = bullet.GetComponent<Bullet>().Bullet_Speed;
         GameObject fired_Bullet = Instantiate(bullet, this.transform.position, this.transform.rotation);
+        if(GameObject.Find("IngameScreen") != null)
+            fired_Bullet.transform.parent = GameObject.Find("IngameScreen").transform; // Player Scene에서는 동작하지 않을 코드임.
         Rigidbody2D fired_Bullet_Rb = fired_Bullet.GetComponent<Rigidbody2D>();
         fired_Bullet_Rb.velocity = new Vector2(Mouse_Position.x - this.transform.position.x,
                                                Mouse_Position.y - this.transform.position.y).normalized * Bullet_Speed;

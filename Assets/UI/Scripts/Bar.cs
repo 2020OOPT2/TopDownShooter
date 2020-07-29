@@ -28,8 +28,8 @@ public class Bar : MonoBehaviour
         float MaxStamina = GameObject.Find("Player").GetComponent<Player>().Player_Max_Stamina;
         HPBar.value = CurHP / MaxHP;
         StaminaBar.value = CurStamina / MaxStamina;
-        Debug.Log(HPBar.value);
-        Debug.Log(StaminaBar.value);
+        //Debug.Log(HPBar.value);
+        //Debug.Log(StaminaBar.value);
     }
 
 }
