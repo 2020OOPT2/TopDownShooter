@@ -7,18 +7,14 @@ public class Bar : MonoBehaviour
 {
     public Slider HPBar;
     public Slider StaminaBar;
-    //Player player = GameObject.Find("Player").GetComponent<Player>();
-    float CurHP;
-    float MaxHP;
-    float CurStamina;
-    float MaxStamina;
+    
 
     void Start()
     {
-        CurHP = GameObject.Find("Player").GetComponent<Player>().Player_Current_HP;
-        MaxHP = GameObject.Find("Player").GetComponent<Player>().Player_Max_HP;
-        CurStamina = GameObject.Find("Player").GetComponent<Player>().Player_Current_Stamina;
-        MaxStamina = GameObject.Find("Player").GetComponent<Player>().Player_Max_Stamina;
+        float CurHP = GameObject.Find("Player").GetComponent<Player>().Player_Current_HP;
+        float MaxHP = GameObject.Find("Player").GetComponent<Player>().Player_Max_HP;
+        float CurStamina = GameObject.Find("Player").GetComponent<Player>().Player_Current_Stamina;
+        float MaxStamina = GameObject.Find("Player").GetComponent<Player>().Player_Max_Stamina;
 
         HPBar.value = CurHP / MaxHP;
         StaminaBar.value = CurStamina / MaxStamina;
@@ -26,11 +22,10 @@ public class Bar : MonoBehaviour
 
     void Update()
     {
-        /*CurHP = GameObject.Find("Player").GetComponent<Player>().Player_Current_HP;
-        MaxHP = GameObject.Find("Player").GetComponent<Player>().Player_Max_HP;
-        CurStamina = GameObject.Find("Player").GetComponent<Player>().Player_Current_Stamina;
-        MaxStamina = GameObject.Find("Player").GetComponent<Player>().Player_Max_Stamina;*/
-
+        float CurHP = GameObject.Find("Player").GetComponent<Player>().Player_Current_HP;
+        float MaxHP = GameObject.Find("Player").GetComponent<Player>().Player_Max_HP;
+        float CurStamina = GameObject.Find("Player").GetComponent<Player>().Player_Current_Stamina;
+        float MaxStamina = GameObject.Find("Player").GetComponent<Player>().Player_Max_Stamina;
         HPBar.value = CurHP / MaxHP;
         StaminaBar.value = CurStamina / MaxStamina;
         Debug.Log(HPBar.value);
