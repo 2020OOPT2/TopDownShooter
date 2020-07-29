@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 175250221}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4281,6 +4281,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4694208426705510980, guid: 806efb46b668bec4cbaae142844d918e,
+        type: 3}
+      propertyPath: Damage_Delay
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 806efb46b668bec4cbaae142844d918e, type: 3}

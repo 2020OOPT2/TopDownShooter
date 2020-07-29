@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using JetBrains.Annotations;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,40 +19,57 @@ public class Player : MonoBehaviour
     public float Sprint_Speed;
     private float Angle; // 플레이어 오브젝트와 마우스포인터 사이의 각도
 
-    private bool Is_Unbeatable = false;
+    public bool Is_Unbeatable = false;
     private float Bullet_Speed;
     public float Damage_Delay; // 데미지 받고난 뒤 무적시간
+    private float Damage_Timer = 0;
 
     private int Bullet_Kind = 1;
-    private List<bool> CanShoot = new List<bool>();
-
+    public List<bool> CanShoot;
+    public List<float> DelayTimer;
+    GameObject Game_Manager;
+    GameObject[] bullet_array;
     // Start is called before the first frame update
+
+
     void Start()
-    {
+    {    
+        CanShoot = new List<bool>();
         Player_Current_HP = Player_Max_HP;
         Move_Speed = Normal_Speed;
         Player_Current_Stamina = Player_Max_Stamina;
         this.GetComponent<Player_Material_Control>().Change_State_ToDefault();
-        GameObject[] bullet_kind = GetComponent<Player_Bullet_Control>().Bullets; // 총알 오브젝트를 담는 배열
-        for(int i = 0; i < bullet_kind.Length; i++) // 각 총알 별 발사 가능 여부를 담는 리스트
+        bullet_array = GetComponent<Player_Bullet_Control>().Bullets; // 총알 오브젝트를 담는 배열
+        for (int i = 0; i < bullet_array.Length; i++) // 각 총알 별 발사 가능 여부를 담는 리스트
         {
             CanShoot.Add(true);
+            DelayTimer.Add(0f);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log("현재 Player 스크립트의 상태 : " + CanShoot[0]);
         if (Player_Current_HP > 0)
         {
             Player_Move();
             Player_Rotate();
             Bullet_Selection();
-            if (CanShoot[Bullet_Kind-1] && Input.GetKey(KeyCode.Mouse0)) // 좌클릭을 통해 발사합니다.
+            Bullet_CoolDown_Manager();
+            Unbeatable_State_Manager2();
+            //GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().CanShoot[Bullet_Kind-1] && Input.GetKey(KeyCode.Mouse0)
+            if (CanShoot[Bullet_Kind-1] && 
+                Input.GetKey(KeyCode.Mouse0)) // 좌클릭을 통해 발사합니다.
             {
-                Fire_Bullet_Fixed();
-                StartCoroutine(Bullet_CoolDown_Manager(Bullet_Kind));
+                Fire_Bullet_Fixed(); // fire 후 canshoot을 false로 변경
+                CanShoot[Bullet_Kind - 1] = false;
+                //Game_Manager.GetComponent<GameManager>().Cooldown(Bullet_Kind);
+                //StartCoroutine(Game_Manager.GetComponent<GameManager>().Bullet_CoolDown_Manager(Bullet_Kind));
+                //StartCoroutine(Bullet_CoolDown_Manager(Bullet_Kind));//여기서 GameManager의 코루틴을 시작한다.
             }
+            else if(!CanShoot[Bullet_Kind - 1] && Input.GetKey(KeyCode.Mouse0))
+                Debug.Log("지금은 못쏴요...");
         }
         else
         {
@@ -59,16 +77,38 @@ public class Player : MonoBehaviour
             Debug.Log("죽었습니다!");
         }
     }
-    
-    IEnumerator Bullet_CoolDown_Manager(int bullet_kind) // 총알의 종류마다 발사 쿨타임을 따로 돌리게 만들어 줍니다.
-    {
-        GameObject bullet = GetComponent<Player_Bullet_Control>().Select_Bullet(Bullet_Kind);
-        float cooldown = bullet.GetComponent<Bullet>().Reload_Time;
-        CanShoot[bullet_kind - 1] = false;
-        yield return new WaitForSeconds(cooldown);
-        CanShoot[bullet_kind - 1] = true;
-    }
 
+    private void Bullet_CoolDown_Manager() // 총알의 종류마다 발사 쿨타임을 따로 돌리게 만들어 줍니다.
+    {
+        for (int bullet_kind= 0; bullet_kind < bullet_array.Length; bullet_kind++) 
+        {
+            float cooldown_time = this.GetComponent<Player_Bullet_Control>().Select_Bullet(bullet_kind+1).GetComponent<Bullet>().Reload_Time;
+            if (CanShoot[bullet_kind] == false)
+            {
+                DelayTimer[bullet_kind] += Time.deltaTime;
+                if (DelayTimer[bullet_kind] >= cooldown_time)
+                {
+                    DelayTimer[bullet_kind] = 0f;
+                    CanShoot[bullet_kind] = true;
+                    Debug.Log("장전 완료");
+                }
+            }
+        }
+    }
+    private void Unbeatable_State_Manager2() // 무적 시간을 관리해 줍니다.
+    {   // 맞는 순간 Is_Unbeatable = true 가 됨.
+        if(Is_Unbeatable == true)
+        {
+            Damage_Timer += Time.deltaTime;
+            if(Damage_Timer >= Damage_Delay)
+            {
+                Debug.Log("무적이 해제되었습니다");
+                Is_Unbeatable = false;
+                this.GetComponent<Player_Material_Control>().Change_State_ToDefault();
+                Damage_Timer = 0;
+            }
+        }
+    }
     IEnumerator Unbeatable_State_Manager(float Unbeatable_Time) // 무적 시간을 관리해 줍니다.
     {
         Is_Unbeatable = true;
@@ -77,14 +117,22 @@ public class Player : MonoBehaviour
         Is_Unbeatable = false;
         this.GetComponent<Player_Material_Control>().Change_State_ToDefault();
     }
-
+    
     public void Player_Damaged(float Mob_Strength)
     {
         if (!Is_Unbeatable) // 무적이 아닐 경우
         {
+            //Debug.Log("실행됨1");
             Player_Current_HP -= Mob_Strength;
             if (Player_Current_HP > 0)
-                StartCoroutine(Unbeatable_State_Manager(Damage_Delay));
+            {
+                Is_Unbeatable = true;
+                //Debug.Log("실행됨");
+                this.GetComponent<Player_Material_Control>().Change_State_ToUnbeatable();
+                //Game_Manager.GetComponent<GameManager>().UnBeatable(Damage_Delay);
+                //StartCoroutine(Game_Manager.GetComponent<GameManager>().Unbeatable_State_Manager(Damage_Delay));
+                //StartCoroutine(Unbeatable_State_Manager(Damage_Delay)); 
+            }
             Debug.Log("플레이어가 맞았습니다!");
         }
         else

@@ -12,6 +12,7 @@ public class SubMenuButton : MonoBehaviour
         {
             SubMenu.SetActive(true);
             IngameScreen.SetActive(false);
+            //타임스케일을 0으로 만든다?
         }
     }
 }
