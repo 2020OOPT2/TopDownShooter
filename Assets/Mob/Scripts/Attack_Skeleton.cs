@@ -15,7 +15,8 @@ public class Attack_Skeleton : MonoBehaviour
 
         if (Distance() >= this.GetComponent<Attack>().AttackRange 
             && Distance() < ShotRange && ShootingTime <= NowShootingTime){
-            Instantiate(Arrow, this.transform.position, Quaternion.identity);
+            GameObject arrow = Instantiate(Arrow, this.transform.position, Quaternion.identity);
+            arrow.transform.parent = GameObject.Find("IngameScreen").transform;
             NowShootingTime = 0;
         }
     }
