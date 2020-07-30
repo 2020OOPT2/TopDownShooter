@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
@@ -18,6 +19,10 @@ public class Attack : MonoBehaviour
         {
             if (GameObject.Find("Player").GetComponent<Player>().Player_Current_HP >= 0)
             {
+
+
+
+
                 //GameObject.Find("Player").GetComponent<Player>().Player_Current_HP -= Strength; <- 기존 코드
                 GameObject.Find("Player").GetComponent<Player>().Player_Damaged(Strength);
                 Debug.Log("플레이어가 " + this.gameObject.name + "에게 " + Strength + "만큼의 피해를 받았습니다.");
@@ -35,8 +40,24 @@ public class Attack : MonoBehaviour
             Debug.Log(gameObject.name + "가 "+ collision.gameObject.GetComponent<Bullet>().Bullet_Damage + "만큼의 피해를 받았습니다.");
             if (HP <= 0)
             {
+                PotionGenerate();
                 Destroy(gameObject);
             }
         }
     }
+
+    public GameObject Potion;
+    public float PotionGenerating;
+    void PotionGenerate()
+    {
+        float temp = Time.time * 100f;
+        Random.InitState((int)temp);
+        int a = Random.Range(0, 100);
+        Debug.Log("랜덤변수는 " + a + "입니다.");
+        if (a < PotionGenerating)
+        {
+            Instantiate(Potion, this.transform.position, Quaternion.identity);
+        }
+    }
+
 }
