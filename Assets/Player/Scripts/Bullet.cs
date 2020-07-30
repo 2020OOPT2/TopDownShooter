@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    CircleCollider2D Bullet_Col;
+    Rigidbody2D Bullet_RB;
+    Vector2 vel;
     public float Bullet_Damage;
     public float Bullet_Speed;
     public float Reload_Time;
     // Start is called before the first frame update
     void Start()
     {
-        Bullet_Col = this.GetComponent<CircleCollider2D>();
+        Bullet_RB = this.GetComponent<Rigidbody2D>();
+        vel = Bullet_RB.velocity;
         this.transform.rotation = GameObject.FindGameObjectWithTag("Player").transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Bullet_RB.velocity = vel;
         //if (this.transform.position.x > 20 || this.transform.position.x < -20 || this.transform.position.y > 20 || this.transform.position.y < -20)
             //Destroy(this.gameObject); // 총알이 일정 범위를 넘어서면 해당 총알을 지웁니다.
     }
