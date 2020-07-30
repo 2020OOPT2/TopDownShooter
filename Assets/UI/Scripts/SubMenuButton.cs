@@ -1,18 +1,28 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class SubMenuButton : MonoBehaviour
 {
     public GameObject SubMenu;
     public GameObject IngameScreen;
+    private bool pause = false;
     void Update()
     {
         if (Input.GetButtonDown("Cancel"))
         {
+            pause = !pause;
+        }
+        if (pause)
+        {
             SubMenu.SetActive(true);
-            IngameScreen.SetActive(false);
-            //타임스케일을 0으로 만든다?
+            Time.timeScale = 0;
+        }
+        else
+        {
+            SubMenu.SetActive(false);
+            Time.timeScale = 1f;
         }
     }
 }
