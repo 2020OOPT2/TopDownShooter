@@ -165,7 +165,8 @@ MonoBehaviour:
   AttackingTime: 2
   Strength: 4
   HP: 10
-  Dead: 0
+  Potion: {fileID: 1660271714696175904, guid: 2d66216c908b01746a96a73c3e4eb03e, type: 3}
+  PotionGenerating: 50
 --- !u!114 &8287463303874156897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Arrow: {fileID: 4926963453370708597, guid: 679d87ea3cf04e041b0cfaadecdbc2d8, type: 3}
   ShootingTime: 1
-  ShotRange: 5
+  ShotRange: 10
 --- !u!1 &850039183184912634
 GameObject:
   m_ObjectHideFlags: 0
