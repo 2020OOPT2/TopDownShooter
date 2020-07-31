@@ -9,6 +9,7 @@ TagManager:
   - Enemy_Bullet
   - Poison
   - GameManager
+  - Wall
   layers:
   - Default
   - TransparentFX

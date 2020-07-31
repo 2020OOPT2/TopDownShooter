@@ -53,6 +53,7 @@ public class Player : MonoBehaviour
             CanShoot.Add(true);
             DelayTimer.Add(0f);
         }
+        Debug.Log(transform.position);
     }
 
     // Update is called once per frame
@@ -66,8 +67,7 @@ public class Player : MonoBehaviour
             Bullet_Selection();
             Bullet_CoolDown_Manager();
             Unbeatable_State_Manager2();
-            if (CanShoot[Bullet_Kind - 1] &&
-                Input.GetKey(KeyCode.Mouse0)) // 좌클릭을 통해 발사합니다.
+            if (CanShoot[Bullet_Kind - 1] && Input.GetKey(KeyCode.Mouse0)) // 좌클릭을 통해 발사합니다.
             {
                 Fire_Bullet_Fixed(); // fire 후 canshoot을 false로 변경
                 CanShoot[Bullet_Kind - 1] = false;
@@ -83,7 +83,7 @@ public class Player : MonoBehaviour
             //Debug.Log("죽었습니다!");
             if(Just_One_Play)
             {
-                GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Death_Sound();
+                GameObject.Find("Sound_Player").GetComponent<Sound>().Death_Sound_Play();
                 Just_One_Play = false;
             }
         }
@@ -129,6 +129,8 @@ public class Player : MonoBehaviour
             {
                 Is_Unbeatable = true;
                 this.GetComponent<Player_Material_Control>().Change_State_ToUnbeatable();
+                //GameObject.Find("Sound_Player").GetComponent<AudioSource>().Play();
+                GameObject.Find("Sound_Player").GetComponent<Sound>().Hit_Sound_Play();
             }
             Debug.Log("플레이어가 맞았습니다!");
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -21,8 +22,6 @@ public class Bullet : MonoBehaviour
     void Update()
     {
         Bullet_RB.velocity = vel;
-        //if (this.transform.position.x > 20 || this.transform.position.x < -20 || this.transform.position.y > 20 || this.transform.position.y < -20)
-            //Destroy(this.gameObject); // 총알이 일정 범위를 넘어서면 해당 총알을 지웁니다.
     }
   
     private void OnTriggerEnter2D(Collider2D collision) // 총알끼리 충돌하는 것을 막기 위해 Is trigger를 체크해 둔 상태입니다.
@@ -30,6 +29,11 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.tag == "Enemy") // 이후 벽 등이 추가될 경우 조건이 추가되어야 할 수 있습니다.
         {
             Debug.Log("적을 맞혔습니다!");
+            Destroy(this.gameObject);
+        }
+        else if(collision.gameObject.tag == "Wall")
+        {
+            Debug.Log("총알이 벽에 맞아 파괴됩니다.");
             Destroy(this.gameObject);
         }
     }
