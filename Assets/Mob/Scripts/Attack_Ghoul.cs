@@ -9,8 +9,8 @@ public class Attack_Ghoul : MonoBehaviour
     public float Strength;
     public float HP;
     float NowAttackingTime = 0;
-    float Distance() { return this.GetComponent<Movement_Mob>().Distance(); }
     public GameObject Poison;
+    float Distance() { return this.GetComponent<Movement_Mob>().Distance(); }
 
     void Update()
     {
@@ -43,20 +43,6 @@ public class Attack_Ghoul : MonoBehaviour
             Instantiate(Poison, PoisonPos, Quaternion.identity);
             Destroy(gameObject);
             Kill_Count.KillCount += 1;
-        }
-    }
-
-    public GameObject Potion;
-    public float PotionGenerating;
-    void PotionGenerate()
-    {
-        float temp = Time.time * 100f;
-        Random.InitState((int)temp);
-        int a = Random.Range(0, 100);
-        Debug.Log("랜덤변수는 " + a + "입니다.");
-        if (a < PotionGenerating)
-        {
-            Instantiate(Potion, this.transform.position, Quaternion.identity);
         }
     }
 
