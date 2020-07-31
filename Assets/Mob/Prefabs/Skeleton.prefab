@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5577202656271626648}
   - component: {fileID: -1680555271732823846}
   - component: {fileID: -89252628581955157}
-  - component: {fileID: -8797728230788299919}
   - component: {fileID: 8287463303874156897}
   m_Layer: 0
   m_Name: Skeleton
@@ -147,26 +146,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29e42d1b6b3da147bed288612f7a736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Walking:
+  - {fileID: 8300000, guid: a028be27b3c28494592f11a6ae991669, type: 3}
+  - {fileID: 8300000, guid: aa6430dc92a010541b66a0b86cd9815d, type: 3}
+  - {fileID: 8300000, guid: d848f6efc7d8df1469775a21c5a7846a, type: 3}
+  - {fileID: 8300000, guid: d34dc405a253cf843883e624f19048d5, type: 3}
+  - {fileID: 8300000, guid: a3e270d3a40da90458c342f9eb6d13da, type: 3}
+  Running:
+  - {fileID: 8300000, guid: 2297347d09698b848ad3da652b4e9944, type: 3}
+  - {fileID: 8300000, guid: 8cfd47c86b81d24488795468995eae2f, type: 3}
+  - {fileID: 8300000, guid: afc81148cf88b3c48bfbd59d42bdfa91, type: 3}
+  - {fileID: 8300000, guid: d88e6bd959ff29740b3eed6ab266ea36, type: 3}
+  - {fileID: 8300000, guid: f0fba75baf76a514da1e094bc11a31be, type: 3}
+  Slowing:
+  - {fileID: 8300000, guid: e5633a3bf427d7140ad133fa3dd7b63e, type: 3}
+  - {fileID: 8300000, guid: f4503cdaac346c849ba0cdfb2f039f77, type: 3}
+  - {fileID: 8300000, guid: 5f6ab9d30af9a364fbb34fdaa71d18f9, type: 3}
+  - {fileID: 8300000, guid: b04cf8501cb49e340a80bb6e111a7d08, type: 3}
+  - {fileID: 8300000, guid: 8485978b26a66a948a4fd8a13452da6f, type: 3}
   Range: 5
   velocity: 2.5
---- !u!114 &-8797728230788299919
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 73033692497771629}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a1c0b46e8d671145b10cddc4958ed24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AttackRange: 1
-  AttackingTime: 2
-  Strength: 4
-  HP: 10
-  Potion: {fileID: 1660271714696175904, guid: 2d66216c908b01746a96a73c3e4eb03e, type: 3}
-  PotionGenerating: 50
+  Rvelocity: 0
 --- !u!114 &8287463303874156897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,9 +179,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a5831d7ae708fe408f4eeb0140d8647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  AttackRange: 1
+  AttackingTime: 2
+  Strength: 3
+  HP: 10
   Arrow: {fileID: 4926963453370708597, guid: 679d87ea3cf04e041b0cfaadecdbc2d8, type: 3}
   ShootingTime: 1
   ShotRange: 10
+  ChangeVelocity: 0.8
+  Potion: {fileID: 1660271714696175904, guid: 2d66216c908b01746a96a73c3e4eb03e, type: 3}
+  PotionGenerating: 50
 --- !u!1 &850039183184912634
 GameObject:
   m_ObjectHideFlags: 0

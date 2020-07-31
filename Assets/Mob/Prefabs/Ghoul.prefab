@@ -454,6 +454,7 @@ GameObject:
   - component: {fileID: 3592444722576596650}
   - component: {fileID: -4762549706448519938}
   - component: {fileID: -3438718015219125412}
+  - component: {fileID: -4321703018280136676}
   m_Layer: 0
   m_Name: Ghoul
   m_TagString: Enemy
@@ -538,8 +539,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29e42d1b6b3da147bed288612f7a736, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Walking:
+  - {fileID: 8300000, guid: a028be27b3c28494592f11a6ae991669, type: 3}
+  - {fileID: 8300000, guid: aa6430dc92a010541b66a0b86cd9815d, type: 3}
+  - {fileID: 8300000, guid: d848f6efc7d8df1469775a21c5a7846a, type: 3}
+  - {fileID: 8300000, guid: d34dc405a253cf843883e624f19048d5, type: 3}
+  - {fileID: 8300000, guid: a3e270d3a40da90458c342f9eb6d13da, type: 3}
+  Running:
+  - {fileID: 8300000, guid: 2297347d09698b848ad3da652b4e9944, type: 3}
+  - {fileID: 8300000, guid: 8cfd47c86b81d24488795468995eae2f, type: 3}
+  - {fileID: 8300000, guid: afc81148cf88b3c48bfbd59d42bdfa91, type: 3}
+  - {fileID: 8300000, guid: d88e6bd959ff29740b3eed6ab266ea36, type: 3}
+  - {fileID: 8300000, guid: f0fba75baf76a514da1e094bc11a31be, type: 3}
+  Slowing:
+  - {fileID: 8300000, guid: e5633a3bf427d7140ad133fa3dd7b63e, type: 3}
+  - {fileID: 8300000, guid: f4503cdaac346c849ba0cdfb2f039f77, type: 3}
+  - {fileID: 8300000, guid: 5f6ab9d30af9a364fbb34fdaa71d18f9, type: 3}
+  - {fileID: 8300000, guid: b04cf8501cb49e340a80bb6e111a7d08, type: 3}
+  - {fileID: 8300000, guid: 8485978b26a66a948a4fd8a13452da6f, type: 3}
   Range: 1
   velocity: 4
+  Rvelocity: 0
 --- !u!50 &3592444722576596650
 Rigidbody2D:
   serializedVersion: 4
@@ -599,13 +619,126 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f0b723992f180243a176a312faa490e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Attacking:
+  - {fileID: 8300000, guid: 5ce6bb262e363834db2b5cdef8a21155, type: 3}
+  - {fileID: 8300000, guid: 4fb45f9472f5e554c82a5a9c7ba4c739, type: 3}
+  - {fileID: 8300000, guid: 24b617db03a924c4ab49c13feb18c10d, type: 3}
+  - {fileID: 8300000, guid: 9f8a1e6741a342647b9c0055e1e0a7b8, type: 3}
+  - {fileID: 8300000, guid: 83041cb4dc7766b48a4342db7511819d, type: 3}
+  - {fileID: 8300000, guid: 1225b0f997026d64fa600c3fd93f1a74, type: 3}
+  - {fileID: 8300000, guid: 8b9826c915109c446be0c38d54721a2d, type: 3}
+  Damaged:
+  - {fileID: 8300000, guid: bdb798b20d5ac2f438f3a562f4150019, type: 3}
+  - {fileID: 8300000, guid: 0547b940dba4d964e9e447af1dc0759a, type: 3}
+  - {fileID: 8300000, guid: a4366158371c9514cae30cfff454dcb2, type: 3}
+  - {fileID: 8300000, guid: fc1882cb9cb0d474c95537bbdb4c48bd, type: 3}
+  - {fileID: 8300000, guid: e29d35a3561cf964e9c39f5b99c2696c, type: 3}
+  - {fileID: 8300000, guid: 5cd921b91deac4f47b05c451951f7a53, type: 3}
+  - {fileID: 8300000, guid: c35b1f489447c164f99deded2c2a9a6a, type: 3}
   AttackRange: 1.3
   AttackingTime: 1
   Strength: 3
   HP: 20
+  ChangeVelocity: 1
   Poison: {fileID: 1102269400571663827, guid: 5770de14953a89047a63dd16176a0d5e, type: 3}
   Potion: {fileID: 1660271714696175904, guid: 2d66216c908b01746a96a73c3e4eb03e, type: 3}
   PotionGenerating: 50
+--- !u!82 &-4321703018280136676
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3671531277427459860}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 0.5
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 10
+  MaxDistance: 20
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &4993864523944640692
 GameObject:
   m_ObjectHideFlags: 0

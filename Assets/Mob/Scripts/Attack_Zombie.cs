@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
-public class Attack_Ghoul : MonoBehaviour
+public class Attack_Zombie : MonoBehaviour
 {
     private AudioSource theAudio;
     [SerializeField] private AudioClip[] Attacking;
@@ -20,12 +21,13 @@ public class Attack_Ghoul : MonoBehaviour
     float NowAttackingTime = 0;
     float Time_PlaySoundAttack = 0;
     float Time_PlaySoundDamaged = 0;
+
     float Time_Damaged = 0;
     bool Damaged_velocity = false;
     float Time_Attacking = 0;
     bool Attacking_velocity = false;
     public float ChangeVelocity;
-    public GameObject Poison;
+
     float Distance() { return this.GetComponent<Movement_Mob>().Distance(); }
 
     void Update()
@@ -64,10 +66,10 @@ public class Attack_Ghoul : MonoBehaviour
                     Time_Attacking = 0;
                     this.GetComponent<Movement_Mob>().velocity += ChangeVelocity;
                 }
-                if (Time_PlaySoundAttack >= 2)
+                if (Time_PlaySoundAttack >= 2) 
                 {
                     Time_PlaySoundAttack = 0;
-                    AudioPlay_Attack();
+                    AudioPlay_Attack(); 
                 }
                 Debug.Log("플레이어가 " + this.gameObject.name + "에게 " + Strength + "만큼의 피해를 받았습니다.");
             }
@@ -76,7 +78,7 @@ public class Attack_Ghoul : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Bullet" && HP >= -1)
+        if (collision.gameObject.tag == "Bullet" && HP > 0)
         {
             HP -= collision.gameObject.GetComponent<Bullet>().Bullet_Damage;
             if (Damaged_velocity == false) // 데미지를 입음
@@ -85,22 +87,19 @@ public class Attack_Ghoul : MonoBehaviour
                 Time_Damaged = 0;
                 this.GetComponent<Movement_Mob>().velocity -= ChangeVelocity;
             }
-            
+
             if (Time_PlaySoundDamaged >= 2)
             {
                 Time_PlaySoundDamaged = 0;
                 AudioPlay_Damaged();
             }
-            Debug.Log(gameObject.name + "가 " + collision.gameObject.GetComponent<Bullet>().Bullet_Damage + "만큼의 피해를 받았습니다.");
-        }
-        if (HP <= 0)
-        {
-            PotionGenerate();
-            Vector3 PoisonPos = this.transform.position;
-            PoisonPos.z += 2;
-            Instantiate(Poison, PoisonPos, Quaternion.identity);
-            Destroy(gameObject);
-            Kill_Count.KillCount += 1;
+            Debug.Log(gameObject.name + "가 "+ collision.gameObject.GetComponent<Bullet>().Bullet_Damage + "만큼의 피해를 받았습니다.");
+            if (HP <= 0)
+            {
+                PotionGenerate();
+                Destroy(gameObject);
+                Kill_Count.KillCount += 1;
+            }
         }
     }
 
