@@ -42,6 +42,35 @@ public class Attack_Ghoul : MonoBehaviour
             PoisonPos.z += 2;
             Instantiate(Poison, PoisonPos, Quaternion.identity);
             Destroy(gameObject);
+            Kill_Count.KillCount += 1;
+        }
+    }
+
+    public GameObject Potion;
+    public float PotionGenerating;
+    void PotionGenerate()
+    {
+        float temp = Time.time * 100f;
+        Random.InitState((int)temp);
+        int a = Random.Range(0, 100);
+        Debug.Log("랜덤변수는 " + a + "입니다.");
+        if (a < PotionGenerating)
+        {
+            Instantiate(Potion, this.transform.position, Quaternion.identity);
+        }
+    }
+
+    public GameObject Potion;
+    public float PotionGenerating;
+    void PotionGenerate()
+    {
+        float temp = Time.time * 100f;
+        Random.InitState((int)temp);
+        int a = Random.Range(0, 100);
+        Debug.Log("랜덤변수는 " + a + "입니다.");
+        if (a < PotionGenerating)
+        {
+            Instantiate(Potion, this.transform.position, Quaternion.identity);
         }
     }
 

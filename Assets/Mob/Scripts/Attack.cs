@@ -42,6 +42,7 @@ public class Attack : MonoBehaviour
             {
                 PotionGenerate();
                 Destroy(gameObject);
+                Kill_Count.KillCount += 1;
             }
         }
     }
