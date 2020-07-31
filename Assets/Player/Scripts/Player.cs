@@ -27,13 +27,21 @@ public class Player : MonoBehaviour
     private int Bullet_Kind = 1;
     public List<bool> CanShoot;
     public List<float> DelayTimer;
-    GameObject Game_Manager;
     GameObject[] bullet_array;
+
+
+    public AudioClip SE1;
+    public AudioClip SE2;
+    public AudioClip Death_SE;
+    bool Just_One_Play = true; // 죽는 사운드를 한 번만 재생시키도록 하기 위함.
+    public AudioSource Player_Audio;
     // Start is called before the first frame update
 
 
     void Start()
-    {    
+    {
+        Player_Audio = this.GetComponent<AudioSource>();
+        Player_Audio.clip = SE1;
         CanShoot = new List<bool>();
         Player_Current_HP = Player_Max_HP;
         Move_Speed = Normal_Speed;
@@ -58,26 +66,28 @@ public class Player : MonoBehaviour
             Bullet_Selection();
             Bullet_CoolDown_Manager();
             Unbeatable_State_Manager2();
-            //GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().CanShoot[Bullet_Kind-1] && Input.GetKey(KeyCode.Mouse0)
-            if (CanShoot[Bullet_Kind-1] && 
+            if (CanShoot[Bullet_Kind - 1] &&
                 Input.GetKey(KeyCode.Mouse0)) // 좌클릭을 통해 발사합니다.
             {
                 Fire_Bullet_Fixed(); // fire 후 canshoot을 false로 변경
                 CanShoot[Bullet_Kind - 1] = false;
-                //Game_Manager.GetComponent<GameManager>().Cooldown(Bullet_Kind);
-                //StartCoroutine(Game_Manager.GetComponent<GameManager>().Bullet_CoolDown_Manager(Bullet_Kind));
-                //StartCoroutine(Bullet_CoolDown_Manager(Bullet_Kind));//여기서 GameManager의 코루틴을 시작한다.
             }
-            else if(!CanShoot[Bullet_Kind - 1] && Input.GetKey(KeyCode.Mouse0))
-                Debug.Log("지금은 못쏴요...");
+            else if (!CanShoot[Bullet_Kind - 1] && Input.GetKey(KeyCode.Mouse0))
+            {
+                Debug.Log("지금은 못쏴요..."); 
+            }
         }
         else
         {
             GetComponent<Player_Material_Control>().Dead();
-            Debug.Log("죽었습니다!");
+            //Debug.Log("죽었습니다!");
+            if(Just_One_Play)
+            {
+                GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Death_Sound();
+                Just_One_Play = false;
+            }
         }
     }
-
     private void Bullet_CoolDown_Manager() // 총알의 종류마다 발사 쿨타임을 따로 돌리게 만들어 줍니다.
     {
         for (int bullet_kind= 0; bullet_kind < bullet_array.Length; bullet_kind++) 
@@ -109,42 +119,23 @@ public class Player : MonoBehaviour
             }
         }
     }
-    IEnumerator Unbeatable_State_Manager(float Unbeatable_Time) // 무적 시간을 관리해 줍니다.
-    {
-        Is_Unbeatable = true;
-        this.GetComponent<Player_Material_Control>().Change_State_ToUnbeatable();  
-        yield return new WaitForSeconds(Unbeatable_Time);
-        Is_Unbeatable = false;
-        this.GetComponent<Player_Material_Control>().Change_State_ToDefault();
-    }
     
     public void Player_Damaged(float Mob_Strength)
     {
         if (!Is_Unbeatable) // 무적이 아닐 경우
         {
-            //Debug.Log("실행됨1");
             Player_Current_HP -= Mob_Strength;
             if (Player_Current_HP > 0)
             {
                 Is_Unbeatable = true;
-                //Debug.Log("실행됨");
                 this.GetComponent<Player_Material_Control>().Change_State_ToUnbeatable();
-                //Game_Manager.GetComponent<GameManager>().UnBeatable(Damage_Delay);
-                //StartCoroutine(Game_Manager.GetComponent<GameManager>().Unbeatable_State_Manager(Damage_Delay));
-                //StartCoroutine(Unbeatable_State_Manager(Damage_Delay)); 
             }
             Debug.Log("플레이어가 맞았습니다!");
         }
         else
         {
             Debug.Log("지금은 무적입니다!");
-            Indicator();
         }
-    }
-    private void Indicator()
-    {
-        Debug.Log("현재 체력 : " + Player_Current_HP);
-        Debug.Log("현재 스태미너 : " + Player_Current_Stamina);
     }
     private void Player_Sprint(bool Is_Sprinting) // 스프린트 여부에 따른 플레이어 이동 속력 변화, 스태미너 관리를 담당합니다.
     {
@@ -187,12 +178,19 @@ public class Player : MonoBehaviour
     private void Bullet_Selection() // 발사할 총알의 종류를 선택합니다.
     {
         if (Input.GetKey(KeyCode.Alpha1))
+        { 
             Bullet_Kind = 1;
+            Player_Audio.clip = SE1;
+        }
         else if (Input.GetKey(KeyCode.Alpha2))
+        { 
             Bullet_Kind = 2;
+            Player_Audio.clip = SE2;
+        }
     }
     private void Fire_Bullet_Fixed() // 총알 오브젝트를 생성하고, 마우스 포인터를 향해 발사합니다. Bullet_Speed를 통해 총알 속도를 조절합니다.
     {                                // 총알의 종류를 선택할 수 있습니다.
+        Player_Audio.Play(); 
         GameObject bullet = GetComponent<Player_Bullet_Control>().Select_Bullet(Bullet_Kind);
         Bullet_Speed = bullet.GetComponent<Bullet>().Bullet_Speed;
         GameObject fired_Bullet = Instantiate(bullet, this.transform.position, this.transform.rotation);
