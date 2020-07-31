@@ -47,7 +47,7 @@ public class Attack_Poison : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player" && NowAttackingTime >= AttackingTime)
         {
-            GameObject.Find("Player").GetComponent<Player>().Player_Damaged(Strength);
+            GameObject.Find("Player").GetComponent<Player>().Player_Current_HP -= Strength;
             Debug.Log("플레이어가 " + Strength + "만큼의 피해를 받았습니다.");
             NowAttackingTime = 0;
         }
