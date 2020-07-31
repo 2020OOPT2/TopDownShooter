@@ -604,8 +604,6 @@ MonoBehaviour:
   Strength: 3
   HP: 20
   Poison: {fileID: 1102269400571663827, guid: 5770de14953a89047a63dd16176a0d5e, type: 3}
-  Potion: {fileID: 1660271714696175904, guid: 2d66216c908b01746a96a73c3e4eb03e, type: 3}
-  PotionGenerating: 50
 --- !u!1 &4993864523944640692
 GameObject:
   m_ObjectHideFlags: 0
