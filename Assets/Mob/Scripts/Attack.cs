@@ -36,7 +36,6 @@ public class Attack : MonoBehaviour
             if (HP <= 0)
             {
                 Destroy(gameObject);
-                Kill_Count.KillCount += 1;
             }
         }
     }

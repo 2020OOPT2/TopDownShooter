@@ -15,17 +15,6 @@ public class GameManager : MonoBehaviour
         Application.LoadLevel("UIScene");
     }
 
-    public AudioClip Death_SE;
-    AudioSource Audio;
-    private void Awake()
-    {
-         Audio = GetComponent<AudioSource>();
-    }
-
-    public void Death_Sound()
-    {
-        Audio.Play();
-    }
 
     /*  폐기된 코드 / 사유 : 일시정지 해 놓은 상태에서도 쿨타임을 돌림.
 
