@@ -74,13 +74,13 @@ public class Player : MonoBehaviour
             }
             else if (!CanShoot[Bullet_Kind - 1] && Input.GetKey(KeyCode.Mouse0))
             {
-                Debug.Log("지금은 못쏴요..."); 
+                //Debug.Log("지금은 못쏴요..."); 
             }
         }
         else
         {
             GetComponent<Player_Material_Control>().Dead();
-            //Debug.Log("죽었습니다!");
+            GetComponent<Player_Time_Control>().Stop_this_CoR();
             if(Just_One_Play)
             {
                 GameObject.Find("Sound_Player").GetComponent<Sound>().Death_Sound_Play();

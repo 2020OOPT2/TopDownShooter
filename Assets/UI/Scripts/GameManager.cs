@@ -13,5 +13,5 @@ public class GameManager : MonoBehaviour
     public void GameRestart()
     {
         Application.LoadLevel("UIScene");
-    }    
+    }
 }

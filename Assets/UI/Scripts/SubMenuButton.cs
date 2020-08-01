@@ -11,17 +11,18 @@ public class SubMenuButton : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel") && SubMenu.activeInHierarchy) 
         {
-            Debug.Log("메뉴 없어짐");
-
+            Debug.Log("메뉴 없어짐");         
             SubMenu.SetActive(false);
             IngameScreen.SetActive(true);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Time_Control>().Start_this_CoR();
+            
         }    
         else if(Input.GetButtonDown("Cancel") && !SubMenu.activeInHierarchy) 
         {
             Debug.Log("메뉴 뜸");
-
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Time_Control>().Stop_this_CoR();
             SubMenu.SetActive(true);
-            IngameScreen.SetActive(false);
+            IngameScreen.SetActive(false);           
         }
 
     }
@@ -30,9 +31,8 @@ public class SubMenuButton : MonoBehaviour
         Debug.Log("메뉴 없어짐");
         SubMenu.SetActive(false);
         IngameScreen.SetActive(true);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Time_Control>().Start_this_CoR();
     }
-
-
     //인게임 -> ESC를 눌렀을 때 메뉴가 나와야 한다
     // ESC를 눌렀을 때, 메뉴가 보이면서 TImeScale = 0으로 만든다.
     
