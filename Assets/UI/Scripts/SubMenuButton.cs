@@ -11,7 +11,8 @@ public class SubMenuButton : MonoBehaviour
     {
         if (Input.GetButtonDown("Cancel") && SubMenu.activeInHierarchy) 
         {
-            Debug.Log("메뉴 없어짐");         
+            Debug.Log("메뉴 없어짐");
+            GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<Sound>().BGM_Play();
             SubMenu.SetActive(false);
             IngameScreen.SetActive(true);
             GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Time_Control>().Start_this_CoR();
@@ -20,6 +21,7 @@ public class SubMenuButton : MonoBehaviour
         else if(Input.GetButtonDown("Cancel") && !SubMenu.activeInHierarchy) 
         {
             Debug.Log("메뉴 뜸");
+            GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<Sound>().BGM_Pause();
             GameObject.FindGameObjectWithTag("Player").GetComponent<Player_Time_Control>().Stop_this_CoR();
             SubMenu.SetActive(true);
             IngameScreen.SetActive(false);           

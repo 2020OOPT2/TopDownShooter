@@ -17,7 +17,8 @@ public class Game_Over : MonoBehaviour
             GameObject.Find("Player").GetComponent<Player>().Player_Audio.Play();
             Debug.Log("AfterDeathTime" + AfterDeathTime);
             if (AfterDeathTime >= 2)
-            {
+            {   //브금 멈춤
+                GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<AudioSource>().Stop();
                 IngameScreen.SetActive(false);
                 GameOver.SetActive(true);
             }

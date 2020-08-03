@@ -9,6 +9,7 @@ public class Player_Time_Control : MonoBehaviour
     private bool Is_Time_Delaying = false;
     AudioSource AU1;
     AudioSource AU2;
+    AudioSource AU3;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class Player_Time_Control : MonoBehaviour
         StartCoroutine(Time_Control());
         AU1 = this.GetComponent<AudioSource>();
         AU2 = transform.GetChild(0).GetComponent<AudioSource>();
+        AU3 = GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<AudioSource>();
     }
 
     // Update is called once per frame
@@ -33,11 +35,13 @@ public class Player_Time_Control : MonoBehaviour
         {
             AU1.pitch = 0.25f;
             AU2.pitch = 0.5f;
+            AU3.pitch = 0.5f;
         }
         else
         {
             AU1.pitch = 1;
             AU2.pitch = 1;
+            AU3.pitch = 1;
         }        
     }
     public void Stop_this_CoR() // 서브 메뉴 스크립트에서 코루틴을 활성/비활성하기 위한 함수
