@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
         else
         {
             GetComponent<Player_Material_Control>().Dead();
-            GetComponent<Player_Time_Control>().Stop_this_CoR();
+            StopCoroutine(GetComponent<Player_Time_Control>().Time_Control());
             if(Just_One_Play)
             {
                 GameObject.Find("Sound_Player").GetComponent<Sound>().Death_Sound_Play();
@@ -213,5 +213,13 @@ public class Player : MonoBehaviour
             this.transform.position += new Vector3(-1, 0, 0) * Move_Speed * Time.deltaTime;
         if (Input.GetKey(KeyCode.D))
             this.transform.position += new Vector3(1, 0, 0) * Move_Speed * Time.deltaTime;
+    }
+    private void OnDisable()
+    {
+        GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<Sound>().BGM_Pause();
+    }
+    private void OnEnable()
+    {
+        GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<Sound>().BGM_Play();
     }
 }

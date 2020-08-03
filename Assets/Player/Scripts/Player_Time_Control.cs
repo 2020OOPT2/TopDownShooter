@@ -44,14 +44,15 @@ public class Player_Time_Control : MonoBehaviour
             AU3.pitch = 1;
         }        
     }
-    public void Stop_this_CoR() // 서브 메뉴 스크립트에서 코루틴을 활성/비활성하기 위한 함수
-    {
-        StopCoroutine("Time_Control");
-    }
-    public void Start_this_CoR()
+    private void OnEnable()
     {
         StartCoroutine(Time_Control());
     }
+    private void OnDisable()
+    {
+        StopCoroutine("Time_Control");
+    }
+ 
     public IEnumerator Time_Control()
     {
         while(true)

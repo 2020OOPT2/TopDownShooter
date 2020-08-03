@@ -13,12 +13,11 @@ public class Game_Over : MonoBehaviour
         float CurHP = GameObject.Find("Player").GetComponent<Player>().Player_Current_HP;
         if (CurHP <= 0)
         {
-            AfterDeathTime = AfterDeathTime + Time.deltaTime;           
-            GameObject.Find("Player").GetComponent<Player>().Player_Audio.Play();
+            AfterDeathTime = AfterDeathTime + Time.deltaTime;                  
             Debug.Log("AfterDeathTime" + AfterDeathTime);
             if (AfterDeathTime >= 2)
-            {   //브금 멈춤
-                GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<AudioSource>().Stop();
+            {   
+                GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<AudioSource>().Stop();//브금 멈춤
                 IngameScreen.SetActive(false);
                 GameOver.SetActive(true);
             }
