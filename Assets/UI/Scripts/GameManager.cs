@@ -12,6 +12,8 @@ public class GameManager : MonoBehaviour
 
     public void GameRestart()
     {
+        Survival_Time.SurvivalTime = 0;
+        Kill_Count.KillCount = 0;
         Application.LoadLevel("UIScene");
     }
 }
