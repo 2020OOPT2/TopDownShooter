@@ -216,7 +216,10 @@ public class Player : MonoBehaviour
     }
     private void OnDisable()
     {
-        GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<Sound>().BGM_Pause();
+        if (GameObject.FindGameObjectWithTag("GameManager") == null)
+            return;
+        else
+            GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<Sound>().BGM_Pause();
     }
     private void OnEnable()
     {
