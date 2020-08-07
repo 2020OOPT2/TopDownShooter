@@ -7,6 +7,7 @@ public class Bar : MonoBehaviour
 {
     public Slider HPBar;
     public Slider StaminaBar;
+    public Slider BulletTimeBar;
     
 
     void Start()
@@ -15,9 +16,12 @@ public class Bar : MonoBehaviour
         float MaxHP = GameObject.Find("Player").GetComponent<Player>().Player_Max_HP;
         float CurStamina = GameObject.Find("Player").GetComponent<Player>().Player_Current_Stamina;
         float MaxStamina = GameObject.Find("Player").GetComponent<Player>().Player_Max_Stamina;
+        float MaxTimeForce = GameObject.Find("Player").GetComponent<Player_Time_Control>().Max_Time_Force;
+        float CurTimeForce = GameObject.Find("Player").GetComponent<Player_Time_Control>().Cur_Time_Force;
 
         HPBar.value = CurHP / MaxHP;
         StaminaBar.value = CurStamina / MaxStamina;
+        BulletTimeBar.value = CurTimeForce / MaxTimeForce;
     }
 
     void Update()
@@ -26,8 +30,11 @@ public class Bar : MonoBehaviour
         float MaxHP = GameObject.Find("Player").GetComponent<Player>().Player_Max_HP;
         float CurStamina = GameObject.Find("Player").GetComponent<Player>().Player_Current_Stamina;
         float MaxStamina = GameObject.Find("Player").GetComponent<Player>().Player_Max_Stamina;
+        float MaxTimeForce = GameObject.Find("Player").GetComponent<Player_Time_Control>().Max_Time_Force;
+        float CurTimeForce = GameObject.Find("Player").GetComponent<Player_Time_Control>().Cur_Time_Force;
         HPBar.value = CurHP / MaxHP;
         StaminaBar.value = CurStamina / MaxStamina;
+        BulletTimeBar.value = CurTimeForce / MaxTimeForce;
         //Debug.Log(HPBar.value);
         //Debug.Log(StaminaBar.value);
     }
