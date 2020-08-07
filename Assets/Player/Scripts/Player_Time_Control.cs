@@ -6,7 +6,7 @@ public class Player_Time_Control : MonoBehaviour
 {
     public float Max_Time_Force;
     public float Cur_Time_Force;
-    private bool Is_Time_Delaying = false;
+    public bool Is_Time_Delaying = false;
     AudioSource AU1;
     AudioSource AU2;
     AudioSource AU3;
