@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,7 @@ public class Survival_Time : MonoBehaviour
     //생존 시간 변수
     public Text SurvivalTimeText;
     public static float SurvivalTime = 0;
+    public static double STime;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,7 @@ public class Survival_Time : MonoBehaviour
         {
             SurvivalTime += Time.deltaTime;
         }
-
-        SurvivalTimeText.text = "Time: " + SurvivalTime.ToString();
+        STime = Math.Round(SurvivalTime, 2);
+        SurvivalTimeText.text = "Time: " + STime.ToString();
     }
 }

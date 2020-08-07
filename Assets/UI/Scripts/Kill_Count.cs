@@ -17,6 +17,6 @@ public class Kill_Count : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        KillCountText.text = "Kill: " + KillCount.ToString();
+        KillCountText.text = "Kills: " + KillCount.ToString();
     }
 }

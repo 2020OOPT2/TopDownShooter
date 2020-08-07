@@ -16,6 +16,6 @@ public class SurvivalTime_GameOver : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SurvivalTimeGameOverText.text = "Time: " + Survival_Time.SurvivalTime.ToString();
+        SurvivalTimeGameOverText.text = "Time: " + Survival_Time.STime.ToString();
     }
 }
