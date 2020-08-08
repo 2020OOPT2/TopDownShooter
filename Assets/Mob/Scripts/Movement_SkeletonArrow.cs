@@ -6,28 +6,21 @@ using UnityEngine;
 public class Movement_SkeletonArrow : MonoBehaviour
 {
     public float velocity;
-    //float velocity_Arrow;
-    //Boolean Stop;
-
+    public float Damage;
     Vector2 followPos;
 
     void Awake()
     {
         followPos = GameObject.Find("Player").transform.position;
-        //velocity_Arrow = velocity;
         Rotate();
-        //Stop = 0;
     }
 
     void Update()
     {
-        transform.position = 
+        transform.position =
         Vector2.MoveTowards(transform.position,
                          followPos,
-                         velocity * Time.deltaTime); // velocity 치환 velocity_Arrow
-        //if (Stop)
-        //    velocity_Arrow = 0;
-        //else velocity_Arrow = velocity;
+                         velocity * Time.deltaTime);
 
         if (Distance() < 0.2)
             Destroy(gameObject);
@@ -46,5 +39,14 @@ public class Movement_SkeletonArrow : MonoBehaviour
         Quaternion rotation = Quaternion.LookRotation(direction);
         transform.rotation = rotation;
         transform.Rotate(0, 90, 90);
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            GameObject.Find("Player").GetComponent<Player>().Player_Damaged(Damage);
+            Debug.Log("플레이어가 " + Damage + "만큼의 피해를 받았습니다.");
+        }
+        Destroy(gameObject);
     }
 }
