@@ -27,15 +27,27 @@ public class Spawning : MonoBehaviour
                 pos = Random.Range(-19, 20);
                 if (side == 0)
                 {
-                    if (type == 0) Instantiate(Zom, new Vector3(pos, 15, 0), Quaternion.identity);
-                    else if (type == 1) Instantiate(Ske, new Vector3(pos, 15, 0), Quaternion.identity);
-                    else Instantiate(Gho, new Vector3(pos, 15, 0), Quaternion.identity);
+                    if (type == 0) Instantiate(Zom, new Vector3(pos + GameObject.Find("Wall").transform.position.x
+                        , 15 + GameObject.Find("Wall").transform.position.y
+                        , 0 + GameObject.Find("Wall").transform.position.z), Quaternion.identity);
+                    else if (type == 1) Instantiate(Ske, new Vector3(pos + GameObject.Find("Wall").transform.position.x
+                        , 15 + GameObject.Find("Wall").transform.position.y
+                        , 0 + GameObject.Find("Wall").transform.position.z), Quaternion.identity);
+                    else Instantiate(Gho, new Vector3(pos + GameObject.Find("Wall").transform.position.x
+                        , 15 + GameObject.Find("Wall").transform.position.y
+                        , 0 + GameObject.Find("Wall").transform.position.z), Quaternion.identity);
                 }
                 else
                 {
-                    if (type == 0) Instantiate(Zom, new Vector3(pos, -15, 0), Quaternion.identity);
-                    else if (type == 1) Instantiate(Ske, new Vector3(pos, -15, 0), Quaternion.identity);
-                    else Instantiate(Gho, new Vector3(pos, -15, 0), Quaternion.identity);
+                    if (type == 0) Instantiate(Zom, new Vector3(pos + GameObject.Find("Wall").transform.position.x
+                        , 15 + GameObject.Find("Wall").transform.position.y
+                        , 0 + GameObject.Find("Wall").transform.position.z), Quaternion.identity);
+                    else if (type == 1) Instantiate(Ske, new Vector3(pos + GameObject.Find("Wall").transform.position.x
+                        , 15 + GameObject.Find("Wall").transform.position.y
+                        , 0 + GameObject.Find("Wall").transform.position.z), Quaternion.identity);
+                    else Instantiate(Gho, new Vector3(pos + GameObject.Find("Wall").transform.position.x
+                        , 15 + GameObject.Find("Wall").transform.position.y
+                        , 0 + GameObject.Find("Wall").transform.position.z), Quaternion.identity);
                 }
             }
             else

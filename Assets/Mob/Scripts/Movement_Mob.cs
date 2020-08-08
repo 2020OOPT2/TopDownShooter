@@ -11,6 +11,8 @@ public class Movement_Mob : MonoBehaviour
 
     private void Start()
     {
+        if (GameObject.Find("IngameScreen") != null)
+            transform.parent = GameObject.Find("IngameScreen").transform;
         theAudio = GetComponent<AudioSource>();
     }
 
