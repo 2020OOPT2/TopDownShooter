@@ -13,9 +13,11 @@ public class Attack_Poison : MonoBehaviour
 
     float Velocity_radius;
     float Velocity_Scale;
+    float Rradius;
 
     private void Awake()
     {
+        Rradius = this.GetComponent<CircleCollider2D>().radius;
         this.GetComponent<CircleCollider2D>().radius = 0;
         transform.localScale = new Vector3(0, 0, (float)0.001);
         Velocity_radius = (float)(0.5 / Velocity); // Prefab의 Collider2D에 보면 radius는 0.5이다.
@@ -30,7 +32,7 @@ public class Attack_Poison : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (this.GetComponent<CircleCollider2D>().radius <= 0.5)
+        if (this.GetComponent<CircleCollider2D>().radius <= Rradius)
         {
             this.GetComponent<CircleCollider2D>().radius += Velocity_radius * Time.deltaTime;
         }

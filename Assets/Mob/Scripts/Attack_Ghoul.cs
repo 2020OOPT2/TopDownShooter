@@ -15,6 +15,8 @@ public class Attack_Ghoul : MonoBehaviour
 
     public float AttackRange;
     public float AttackingTime;
+    public float Poison2AttackingTime;
+    float NowPoison2AttackingTime = 0;
     public float Strength;
     public float HP;
     float NowAttackingTime = 0;
@@ -26,10 +28,20 @@ public class Attack_Ghoul : MonoBehaviour
     bool Attacking_velocity = false;
     public float ChangeVelocity;
     public GameObject Poison;
+    public GameObject Poison2;
     float Distance() { return this.GetComponent<Movement_Mob>().Distance(); }
 
     void Update()
     {
+        NowPoison2AttackingTime += Time.deltaTime;
+        if (NowPoison2AttackingTime >= Poison2AttackingTime)
+        {
+            Vector3 PoisonPos2 = this.transform.position;
+            PoisonPos2.z += 2;
+            Instantiate(Poison2, PoisonPos2, Quaternion.identity);
+            NowPoison2AttackingTime = 0;
+        }
+
         if (Damaged_velocity == true) // 데미지를 입었는가
         {
             Time_Damaged += Time.deltaTime;
