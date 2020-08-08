@@ -8,6 +8,8 @@ public class Movement_SkeletonArrow : MonoBehaviour
     public float velocity;
     public float Damage;
     Vector2 followPos;
+    public float Time_embedded;
+    float NowTime_embedded = 0;
 
     void Awake()
     {
@@ -19,14 +21,23 @@ public class Movement_SkeletonArrow : MonoBehaviour
 
     void Update()
     {
-        transform.position =
-        Vector2.MoveTowards(transform.position,
-                         followPos,
-                         velocity * Time.deltaTime);
-
-        if (Distance() < 0.2)
+        if (Distance() > 0.1) 
+        {
+            transform.position =
+            Vector2.MoveTowards(transform.position,
+                             followPos,
+                             velocity * Time.deltaTime);
+        }
+        else
+        {
+            NowTime_embedded += Time.deltaTime;
+        }
+        if(NowTime_embedded >= Time_embedded)
+        {
             Destroy(gameObject);
+        }
     }
+
     float Distance()
     {
         float X = transform.position.x - followPos.x;
@@ -50,6 +61,10 @@ public class Movement_SkeletonArrow : MonoBehaviour
             Debug.Log("플레이어가 " + Damage + "만큼의 피해를 받았습니다.");
             Destroy(gameObject);
         }
-
+        if (collision.gameObject.tag == "Wall")
+        {
+            Debug.Log("총알이 벽에 맞아 파괴됩니다.");
+            Destroy(this.gameObject);
+        }
     }
 }
