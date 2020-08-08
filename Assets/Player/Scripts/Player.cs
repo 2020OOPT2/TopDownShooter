@@ -216,13 +216,16 @@ public class Player : MonoBehaviour
     }
     private void OnDisable()
     {
-        if (GameObject.FindGameObjectWithTag("GameManager") == null)
-            return;
+        if (GameObject.Find("GameManager").gameObject == null)
+        {
+            Debug.Log("없어요!");
+            return; 
+        }
         else
-            GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<Sound>().BGM_Pause();
+            GameObject.Find("GameManager").gameObject.GetComponentInChildren<Sound>().BGM_Pause();
     }
     private void OnEnable()
     {
-        GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<Sound>().BGM_Play();
+        GameObject.Find("GameManager").gameObject.GetComponentInChildren<Sound>().BGM_Play();
     }
 }

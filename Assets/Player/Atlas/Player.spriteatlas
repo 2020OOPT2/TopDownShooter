@@ -23,7 +23,7 @@ SpriteAtlas:
     platformSettings:
     - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
-      m_MaxTextureSize: 2048
+      m_MaxTextureSize: 8192
       m_ResizeAlgorithm: 0
       m_TextureFormat: -1
       m_TextureCompression: 2
@@ -46,7 +46,9 @@ SpriteAtlas:
     - {fileID: 102900000, guid: f76538fe4406f2045b475ba68f1394db, type: 3}
     - {fileID: 102900000, guid: e7636a7a344ae4e45bf8db381764f2fd, type: 3}
     - {fileID: 102900000, guid: c6a2fd57ba9c9f54b9e48dae5e64013e, type: 3}
-    totalSpriteSurfaceArea: 78060
+    - {fileID: 2800000, guid: 2f605f8487435b64780f2f663cc01c4c, type: 3}
+    - {fileID: 2800000, guid: 5adedf998b5c345448207fa3f1670740, type: 3}
+    totalSpriteSurfaceArea: 78562
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
@@ -64,6 +66,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 0c1e30a394c96eb43a6733f4d2fb0dc2, type: 3}
   - {fileID: 21300000, guid: 44c869c3025246b4f987f6741c8107cc, type: 3}
   - {fileID: 21300000, guid: 23667184dcfb5ad40aecc248cdfb0987, type: 3}
+  - {fileID: 21300000, guid: 2f605f8487435b64780f2f663cc01c4c, type: 3}
   - {fileID: 21300000, guid: e7b74cf4e7354414d8c3016f46db36d8, type: 3}
   - {fileID: 21300000, guid: 2070b1d5457ab9d4ea5729082fb52748, type: 3}
   - {fileID: 21300000, guid: 6a7aea4607e01b6429f3469b1eb56e51, type: 3}
@@ -73,6 +76,13 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b6c7a657f9dea1641ba6a953011adb9c, type: 3}
   - {fileID: 21300000, guid: 7783d177a8f06f74fa19d7186965fe8b, type: 3}
   - {fileID: 21300000, guid: fed8b5e747b2f4549ba9888ed1d924ad, type: 3}
+  - {fileID: 7431529995326980795, guid: 5adedf998b5c345448207fa3f1670740, type: 3}
+  - {fileID: -7803065417098437583, guid: 5adedf998b5c345448207fa3f1670740, type: 3}
+  - {fileID: -7976837497307082302, guid: 5adedf998b5c345448207fa3f1670740, type: 3}
+  - {fileID: 874343242196921964, guid: 5adedf998b5c345448207fa3f1670740, type: 3}
+  - {fileID: 6112890488319390909, guid: 5adedf998b5c345448207fa3f1670740, type: 3}
+  - {fileID: 830317617348258784, guid: 5adedf998b5c345448207fa3f1670740, type: 3}
+  - {fileID: -7779215486825634471, guid: 5adedf998b5c345448207fa3f1670740, type: 3}
   - {fileID: 21300000, guid: a735bf1a9a6ab33409c53e6e3bc62f61, type: 3}
   - {fileID: 21300000, guid: 093caf3a28457cc45b6d158d085a572d, type: 3}
   - {fileID: 21300000, guid: 1f62994a4b3bc9e46a5d9011b77c37d5, type: 3}
@@ -108,6 +118,7 @@ SpriteAtlas:
   - SoldierWalk13
   - SoldierDeath13
   - Soldier_Run9
+  - S_ItemHeavyOutline_PotionRed_00
   - SoldierDeath2
   - SoldierDeath5
   - Soldier_Run11
@@ -117,6 +128,13 @@ SpriteAtlas:
   - SoldierDeath3
   - SoldierWalk5
   - SoldierDeath8
+  - Bullets_3
+  - Bullets_2
+  - Bullets_1
+  - Bullets_0
+  - Bullets_6
+  - Bullets_5
+  - Bullets_4
   - SoldierWalk1
   - SoldierDeath6
   - Soldier_Run5
