@@ -61,8 +61,8 @@ public class Player_Time_Control : MonoBehaviour
             {
                 Cur_Time_Force -= 2;
                 Time.timeScale = 0.25f;
-                Debug.Log("현재 타임 포스 : " + Cur_Time_Force);
-                Debug.Log(Cur_Time_Force);
+                //Debug.Log("현재 타임 포스 : " + Cur_Time_Force);
+                //Debug.Log(Cur_Time_Force);
                 yield return new WaitForSecondsRealtime(0.1f);
             }
             else
@@ -72,14 +72,14 @@ public class Player_Time_Control : MonoBehaviour
                     Cur_Time_Force += 1;
                     Time.timeScale = 1;
                     Is_Time_Delaying = false;
-                    Debug.Log("현재 타임 포스 : "+Cur_Time_Force);
-                    Debug.Log("시간이 정상적으로 흐릅니다.");
+                    //Debug.Log("현재 타임 포스 : "+Cur_Time_Force);
+                   // Debug.Log("시간이 정상적으로 흐릅니다.");
                     yield return new WaitForSecondsRealtime(0.1f);
                 }
                 else
                 {
                     Is_Time_Delaying = false;
-                    Debug.Log("현재 타임 포스 : " + Cur_Time_Force);
+                   // Debug.Log("현재 타임 포스 : " + Cur_Time_Force);
                     yield return new WaitForSecondsRealtime(0.1f);                    
                 }
             }
