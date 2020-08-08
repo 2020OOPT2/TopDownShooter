@@ -29,18 +29,15 @@ public class Spawning : MonoBehaviour
                 {
                     if (type == 0) { 
                         GameObject mob = Instantiate(Zom, new Vector3(pos, 15, 0), Quaternion.identity);
-                        mob.transform.parent = GameObject.Find("IngameScreen").transform;
-                        mob.transform.position += mob.transform.parent.position;
+                        Instantiated_Mob_Calibrate(mob);
                     }
                     else if (type == 1) { 
                         GameObject mob = Instantiate(Ske, new Vector3(pos, 15, 0), Quaternion.identity);
-                        mob.transform.parent = GameObject.Find("IngameScreen").transform;
-                        mob.transform.position += mob.transform.parent.position;
+                        Instantiated_Mob_Calibrate(mob);
                     }
                     else { 
                         GameObject mob = Instantiate(Gho, new Vector3(pos, 15, 0), Quaternion.identity);
-                        mob.transform.parent = GameObject.Find("IngameScreen").transform;
-                        mob.transform.position += mob.transform.parent.position;
+                        Instantiated_Mob_Calibrate(mob);
                     }
                    
                 }
@@ -48,18 +45,15 @@ public class Spawning : MonoBehaviour
                 {
                     if (type == 0) { 
                         GameObject mob = Instantiate(Zom, new Vector3(pos, -15, 0), Quaternion.identity);
-                        mob.transform.parent = GameObject.Find("IngameScreen").transform;
-                        mob.transform.position += mob.transform.parent.position;
+                        Instantiated_Mob_Calibrate(mob);
                     }
                     else if (type == 1) { 
                         GameObject mob = Instantiate(Ske, new Vector3(pos, -15, 0), Quaternion.identity);
-                        mob.transform.parent = GameObject.Find("IngameScreen").transform;
-                        mob.transform.position += mob.transform.parent.position;
+                        Instantiated_Mob_Calibrate(mob);
                     }
                     else { 
                         GameObject mob = Instantiate(Gho, new Vector3(pos, -15, 0), Quaternion.identity);
-                        mob.transform.parent = GameObject.Find("IngameScreen").transform;
-                        mob.transform.position += mob.transform.parent.position;
+                        Instantiated_Mob_Calibrate(mob);
                     }
                 }
             }
@@ -71,20 +65,17 @@ public class Spawning : MonoBehaviour
                     if (type == 0)
                     {
                         GameObject mob = Instantiate(Zom, new Vector3(19, pos, 0), Quaternion.identity);
-                        mob.transform.parent = GameObject.Find("IngameScreen").transform;
-                        mob.transform.position += mob.transform.parent.position;
+                        Instantiated_Mob_Calibrate(mob);
                     }
                     else if (type == 1)
                     {
                         GameObject mob = Instantiate(Ske, new Vector3(19, pos, 0), Quaternion.identity);
-                        mob.transform.parent = GameObject.Find("IngameScreen").transform;
-                        mob.transform.position += mob.transform.parent.position;
+                        Instantiated_Mob_Calibrate(mob);
                     }
                     else
                     {
                         GameObject mob = Instantiate(Gho, new Vector3(19, pos, 0), Quaternion.identity);
-                        mob.transform.parent = GameObject.Find("IngameScreen").transform;
-                        mob.transform.position += mob.transform.parent.position;
+                        Instantiated_Mob_Calibrate(mob);
                     }
                 }
                 else
@@ -92,25 +83,28 @@ public class Spawning : MonoBehaviour
                     if (type == 0)
                     {
                         GameObject mob = Instantiate(Zom, new Vector3(-19, pos, 0), Quaternion.identity);
-                        mob.transform.parent = GameObject.Find("IngameScreen").transform;
-                        mob.transform.position += mob.transform.parent.position;
+                        Instantiated_Mob_Calibrate(mob);
                     }
                     else if (type == 1)
                     {
                         GameObject mob = Instantiate(Ske, new Vector3(-19, pos, 0), Quaternion.identity);
-                        mob.transform.parent = GameObject.Find("IngameScreen").transform;
-                        mob.transform.position += mob.transform.parent.position;
+                        Instantiated_Mob_Calibrate(mob);
                     }
                     else
                     {
                         GameObject mob = Instantiate(Gho, new Vector3(-19, pos, 0), Quaternion.identity);
-                        mob.transform.parent = GameObject.Find("IngameScreen").transform;
-                        mob.transform.position += mob.transform.parent.position;
+                        Instantiated_Mob_Calibrate(mob);
                     }
                 }
             }
             time = 0;
             Debug.Log("pos:" + pos);
         }
+    }
+    void Instantiated_Mob_Calibrate(GameObject mob)
+    {
+        mob.transform.parent = GameObject.Find("IngameScreen").transform;
+        mob.transform.position += mob.transform.parent.position;
+        mob.transform.localScale = new Vector3(1, 1, 1);
     }
 }

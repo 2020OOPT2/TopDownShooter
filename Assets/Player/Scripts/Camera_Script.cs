@@ -12,6 +12,8 @@ public class Camera_Script : MonoBehaviour
     void Start()
     {
         Player = GameObject.Find("Player");
+        Camera.main.orthographicSize = Screen.height/100;
+            
     }
 
     // Update is called once per frame
