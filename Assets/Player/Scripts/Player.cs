@@ -40,6 +40,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        //this.transform.localScale = new Vector3(1, 1, 1);
         Player_Audio = this.GetComponent<AudioSource>();
         Player_Audio.clip = SE1;
         CanShoot = new List<bool>();
@@ -199,6 +200,10 @@ public class Player : MonoBehaviour
         if(GameObject.Find("IngameScreen") != null)
             fired_Bullet.transform.parent = GameObject.Find("IngameScreen").transform; // Player Scene에서는 동작하지 않을 코드임.
         Rigidbody2D fired_Bullet_Rb = fired_Bullet.GetComponent<Rigidbody2D>();
+        if (Bullet_Kind == 1)
+            fired_Bullet.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        else
+            fired_Bullet.transform.localScale = new Vector3(1, 1, 1);
         fired_Bullet_Rb.velocity = new Vector2(Mouse_Position.x - this.transform.position.x,
                                                Mouse_Position.y - this.transform.position.y).normalized * Bullet_Speed;
     }

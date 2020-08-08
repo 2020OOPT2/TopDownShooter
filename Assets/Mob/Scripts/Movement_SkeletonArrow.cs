@@ -12,11 +12,15 @@ public class Movement_SkeletonArrow : MonoBehaviour
     float NowTime_embedded = 0;
 
     void Awake()
-    {
+    {       
         followPos = GameObject.Find("Player").transform.position;
         Rotate();
         if (GameObject.Find("IngameScreen") != null)
             transform.parent = GameObject.Find("IngameScreen").transform;
+    }
+    private void Start()
+    {
+        transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
     }
 
     void Update()
