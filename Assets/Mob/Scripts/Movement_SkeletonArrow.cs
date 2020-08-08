@@ -13,6 +13,8 @@ public class Movement_SkeletonArrow : MonoBehaviour
     {
         followPos = GameObject.Find("Player").transform.position;
         Rotate();
+        if (GameObject.Find("IngameScreen") != null)
+            transform.parent = GameObject.Find("IngameScreen").transform;
     }
 
     void Update()

@@ -165,7 +165,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 5f6ab9d30af9a364fbb34fdaa71d18f9, type: 3}
   - {fileID: 8300000, guid: b04cf8501cb49e340a80bb6e111a7d08, type: 3}
   - {fileID: 8300000, guid: 8485978b26a66a948a4fd8a13452da6f, type: 3}
-  Range: 5
+  Range: 1
   velocity: 2.5
   Rvelocity: 0
 --- !u!114 &8287463303874156897
