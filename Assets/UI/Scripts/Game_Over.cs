@@ -6,6 +6,7 @@ public class Game_Over : MonoBehaviour
 {
     float AfterDeathTime = 0;
     public GameObject IngameScreen;
+    public GameObject IngameScreenUI;
     public GameObject GameOver;
 
     void Update()
@@ -19,6 +20,7 @@ public class Game_Over : MonoBehaviour
             {   
                 GameObject.FindGameObjectWithTag("GameManager").gameObject.GetComponentInChildren<AudioSource>().Stop();//브금 멈춤
                 IngameScreen.SetActive(false);
+                IngameScreenUI.SetActive(false);
                 GameOver.SetActive(true);
             }
 
