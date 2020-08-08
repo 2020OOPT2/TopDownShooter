@@ -48,7 +48,8 @@ public class Movement_SkeletonArrow : MonoBehaviour
         {
             GameObject.Find("Player").GetComponent<Player>().Player_Damaged(Damage);
             Debug.Log("플레이어가 " + Damage + "만큼의 피해를 받았습니다.");
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
+
     }
 }

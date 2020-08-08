@@ -44,12 +44,12 @@ public class Attack_Skeleton : MonoBehaviour
 
         NowShootingTime += Time.deltaTime;
 
-        //if (Distance() >= AttackRange // 화살을 쏨
-        //    && Distance() < ShotRange && ShootingTime <= NowShootingTime)
-        //{
+        if (Distance() >= AttackRange // 화살을 쏨
+            && Distance() < ShotRange && ShootingTime <= NowShootingTime)
+        {
             Instantiate(Arrow, this.transform.position, Quaternion.identity);
             NowShootingTime = 0;
-        //}
+        }
 
         NowAttackingTime += Time.deltaTime;
         if (Distance() < AttackRange && AttackingTime <= NowAttackingTime)
