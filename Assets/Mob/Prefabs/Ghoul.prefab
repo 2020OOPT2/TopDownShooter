@@ -643,7 +643,7 @@ MonoBehaviour:
   ChangeVelocity: 1
   Poison: {fileID: 1102269400571663827, guid: 5770de14953a89047a63dd16176a0d5e, type: 3}
   Potion: {fileID: 1660271714696175904, guid: 2d66216c908b01746a96a73c3e4eb03e, type: 3}
-  PotionGenerating: 50
+  PotionGenerating: 25
 --- !u!82 &-4321703018280136676
 AudioSource:
   m_ObjectHideFlags: 0

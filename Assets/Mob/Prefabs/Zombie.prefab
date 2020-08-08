@@ -527,7 +527,7 @@ MonoBehaviour:
   HP: 20
   ChangeVelocity: 0.8
   Potion: {fileID: 1660271714696175904, guid: 2d66216c908b01746a96a73c3e4eb03e, type: 3}
-  PotionGenerating: 50
+  PotionGenerating: 25
 --- !u!61 &5852965753113770053
 BoxCollider2D:
   m_ObjectHideFlags: 0

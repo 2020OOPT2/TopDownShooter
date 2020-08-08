@@ -94,6 +94,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Heal_Quantity: 25
+  Time_Destroy: 5
 --- !u!212 &3787916045008675339
 SpriteRenderer:
   m_ObjectHideFlags: 0
