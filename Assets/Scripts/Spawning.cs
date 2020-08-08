@@ -27,15 +27,15 @@ public class Spawning : MonoBehaviour
                 pos = Random.Range(-19, 20);
                 if (side == 0)
                 {
-                    if (type == 0) Instantiate(Zom, new Vector3(575 + pos, 264 + 15, 0), Quaternion.identity);
-                    else if (type == 1) Instantiate(Ske, new Vector3(575 + pos, 264 + 15, 0), Quaternion.identity);
-                    else Instantiate(Gho, new Vector3(575 + pos, 264 + 15, 0), Quaternion.identity);
+                    if (type == 0) Instantiate(Zom, new Vector3(pos, 15, 0), Quaternion.identity);
+                    else if (type == 1) Instantiate(Ske, new Vector3(pos, 15, 0), Quaternion.identity);
+                    else Instantiate(Gho, new Vector3(pos, 15, 0), Quaternion.identity);
                 }
                 else
                 {
-                    if (type == 0) Instantiate(Zom, new Vector3(575 + pos, 264 - 15, 0), Quaternion.identity);
-                    else if (type == 1) Instantiate(Ske, new Vector3(575 + pos, 264 - 15, 0), Quaternion.identity);
-                    else Instantiate(Gho, new Vector3(575 + pos, 264 - 15, 0), Quaternion.identity);
+                    if (type == 0) Instantiate(Zom, new Vector3(pos, -15, 0), Quaternion.identity);
+                    else if (type == 1) Instantiate(Ske, new Vector3(pos, -15, 0), Quaternion.identity);
+                    else Instantiate(Gho, new Vector3(pos, -15, 0), Quaternion.identity);
                 }
             }
             else
@@ -43,15 +43,15 @@ public class Spawning : MonoBehaviour
                 pos = Random.Range(-15, 16);
                 if (side == 1)
                 {
-                    if (type == 0) Instantiate(Zom, new Vector3(575 + 19, 264 + pos, 0), Quaternion.identity);
-                    else if (type == 1) Instantiate(Ske, new Vector3(575 + 19, 264 + pos, 0), Quaternion.identity);
-                    else Instantiate(Gho, new Vector3(575 + 19, 264 + pos, 0), Quaternion.identity);
+                    if (type == 0) Instantiate(Zom, new Vector3(19, pos, 0), Quaternion.identity);
+                    else if (type == 1) Instantiate(Ske, new Vector3(19, pos, 0), Quaternion.identity);
+                    else Instantiate(Gho, new Vector3(19, pos, 0), Quaternion.identity);
                 }
                 else
                 {
-                    if (type == 0) Instantiate(Zom, new Vector3(575 - 19, 264 + pos, 0), Quaternion.identity);
-                    else if (type == 1) Instantiate(Ske, new Vector3(575 - 19, 264 + pos, 0), Quaternion.identity);
-                    else Instantiate(Gho, new Vector3(575 - 19, 264 + pos, 0), Quaternion.identity);
+                    if (type == 0) Instantiate(Zom, new Vector3(-19, pos, 0), Quaternion.identity);
+                    else if (type == 1) Instantiate(Ske, new Vector3(-19, pos, 0), Quaternion.identity);
+                    else Instantiate(Gho, new Vector3(-19, pos, 0), Quaternion.identity);
                 }
             }
             time = 0;
